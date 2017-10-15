@@ -4,10 +4,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DataboolUtil {
-	public Date Datebool(String deadline) throws BaseException {
+public class DataBoolUtil {
+	public Date dateBool(String deadline) throws BaseException {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
+		Date date;
 		try {
 			date = df.parse(deadline);
 		} catch (Exception e) {
@@ -17,9 +17,9 @@ public class DataboolUtil {
 			throw new BaseException("时间不合法");
 		return date;
 	}
-	public Date Datebool(String deadline,String kk) throws BaseException {
+	public Date dateBool(String deadline,String kk) throws BaseException {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
+		Date date;
 		try {
 			date = df.parse(deadline);
 		} catch (Exception e) {

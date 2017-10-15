@@ -11,14 +11,14 @@ import cn.edu.zucc.personplan.model.BeanPlan;
 import cn.edu.zucc.personplan.model.BeanUser;
 import cn.edu.zucc.personplan.util.BaseException;
 import cn.edu.zucc.personplan.util.DBUtil;
-import cn.edu.zucc.personplan.util.DataboolUtil;
+import cn.edu.zucc.personplan.util.DataBoolUtil;
 
 public class PlanManager implements IPlanManager {
 	@Override
 	public BeanPlan addPlan(String name, String deadline) throws BaseException {
 		if (name.length() < 1 || name.length() > 128)
 			throw new BaseException("计划名应在1~128个字符之间");
-		new DataboolUtil().Datebool(deadline);
+		new DataBoolUtil().dateBool(deadline);
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();

@@ -6,23 +6,17 @@ import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import cn.edu.zucc.personplan.model.BeanPlan;
-import cn.edu.zucc.personplan.model.BeanUser;
 import cn.edu.zucc.personplan.util.BaseException;
-import cn.edu.zucc.personplan.util.DataboolUtil;
+import cn.edu.zucc.personplan.util.DataBoolUtil;
 import cn.edu.zucc.personplan.util.PersonPlanUtil;
 
 public class FrmModifyPlan extends JDialog implements ActionListener {
@@ -37,7 +31,7 @@ public class FrmModifyPlan extends JDialog implements ActionListener {
 	private JLabel labelDeadline = new JLabel("截止时间：");
 	private JTextField edtDeadline = new JTextField(20);
 
-	public FrmModifyPlan(Frame f, String s, boolean b) {
+	FrmModifyPlan(Frame f, String s, boolean b) {
 		super(f, s, b);
 		toolBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		toolBar.add(this.btnOk);
@@ -66,12 +60,11 @@ public class FrmModifyPlan extends JDialog implements ActionListener {
 				plan.setPlanname(this.edtName.getText());
 			try {
 				if (!"".equals(this.edtDeadline.getText()))
-					plan.setDeadline(new DataboolUtil().Datebool(this.edtDeadline.getText()));
+					plan.setDeadline(new DataBoolUtil().dateBool(this.edtDeadline.getText()));
 				PersonPlanUtil.planManager.modifyPlan(plan);
 				this.setVisible(false);
 			} catch (BaseException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
-				return;
 			}
 		}
 	}

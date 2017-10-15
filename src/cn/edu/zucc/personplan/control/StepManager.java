@@ -1,18 +1,15 @@
 package cn.edu.zucc.personplan.control;
 
+import cn.edu.zucc.personplan.itf.IStepManager;
+import cn.edu.zucc.personplan.model.BeanPlan;
+import cn.edu.zucc.personplan.model.BeanStep;
+import cn.edu.zucc.personplan.util.*;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.edu.zucc.personplan.itf.IStepManager;
-import cn.edu.zucc.personplan.model.BeanPlan;
-import cn.edu.zucc.personplan.model.BeanStep;
-import cn.edu.zucc.personplan.util.BaseException;
-import cn.edu.zucc.personplan.util.DBUtil;
-import cn.edu.zucc.personplan.util.DataboolUtil;
-import cn.edu.zucc.personplan.util.DbException;
 
 public class StepManager implements IStepManager {
 	@Override
@@ -23,8 +20,8 @@ public class StepManager implements IStepManager {
 			throw new BaseException("计划完成时间不能为空");
 		if ("".equals(planstartdate))
 			throw new BaseException("计划开始时间不能为空");
-		java.util.Date Stime = new DataboolUtil().Datebool(planstartdate, "计划开始时间");
-		java.util.Date Ftime = new DataboolUtil().Datebool(planstartdate, "计划完成时间");
+		java.util.Date Stime = new DataBoolUtil().dateBool(planstartdate, "计划开始时间");
+		java.util.Date Ftime = new DataBoolUtil().dateBool(planstartdate, "计划完成时间");
 		if (Stime.compareTo(Ftime) > 0)
 			throw new BaseException("计划开始时间晚于计划完成时间");
 		if (plan.getDeadline().getTime() < Stime.getTime())
@@ -327,9 +324,9 @@ public class StepManager implements IStepManager {
 	@Override
 	public void modifyStep(BeanStep step, String planstartdate, String planfinishdate) throws BaseException {
 		if (!"".equals(planstartdate))
-			step.setPlanstardate(new DataboolUtil().Datebool(planstartdate, "计划开始时间"));
+			step.setPlanstardate(new DataBoolUtil().dateBool(planstartdate, "计划开始时间"));
 		if (!"".equals(planfinishdate))
-			step.setPlanfinishdate(new DataboolUtil().Datebool(planfinishdate, "计划完成时间"));
+			step.setPlanfinishdate(new DataBoolUtil().dateBool(planfinishdate, "计划完成时间"));
 
 		if (step.getPlanstardate().compareTo(step.getPlanfinishdate()) > 0)
 			throw new BaseException("计划开始时间晚于计划完成时间");
